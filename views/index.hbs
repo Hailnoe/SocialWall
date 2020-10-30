@@ -1,0 +1,39 @@
+<div id="messages-page">
+  {{#if errors}}
+    <div class="notice error">
+      <h2 class="notice-header">Error</h2>
+      <ul class="error-list">
+        {{#each errors}}
+          {{#each this}}
+            <li>{{@../key}} {{message}}</li>
+          {{/each}}
+        {{/each}}
+      </ul>
+    </div>
+  {{/if}}
+
+  <form id="image-form" method="POST" action="/image" enctype="multipart/form-data">
+    <input type="file" name="myimage">
+    <input type="submit" name="submit_image" value="Upload">
+  </form>
+  <div id="messages">
+    <h2>Messages</h2>
+
+    {{#unless messages}}
+      <p>Sorry, no messages. :(</p>
+    {{else}}
+      <ol class="message-list">
+        {{#each messages}}
+          <li>
+            <div class="message-body">
+              <img src="/image?id={{id}}">
+            </div>
+            <div class="message-timestamp">
+              Posted on {{created_at}}
+            </div>
+          </li>
+        {{/each}}
+      </ol>
+    {{/unless}}
+  </div>
+</div>
